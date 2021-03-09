@@ -179,14 +179,14 @@ require(["js/qlik"], function (qlik) {
 						});
 
 						$(".show-all").click(function () {
-							sessionApp.visualization.create('linechart', [], appconfig.lineTrend).then(function (vis) {
+							sessionApp.visualization.create('linechart', [], vizData.lineTrend).then(function (vis) {
 								vis.show("QV01");
 							});
 
 						});
 
 						$(".show-50").click(function () {
-							let lineProp = JSON.parse(JSON.stringify(appconfig.lineTrend));
+							let lineProp = JSON.parse(JSON.stringify(vizData.lineTrend));
 							lineProp.qHyperCubeDef.qMeasures[0].qDef.qDef = 'Avg({<Timestamp={">=$(=(Timestamp(max(Timestamp) - (1/24/60))))"}>} Temperature)';
 							sessionApp.visualization.create('linechart', [], lineProp).then(function (vis) {
 								vis.show("QV01");
