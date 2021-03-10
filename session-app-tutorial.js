@@ -81,22 +81,7 @@ require(["js/qlik"], function (qlik) {
 	var sessionApp = null;
 	var vizArray = [];
 
-	$(".close-session-app").click(function () {
 
-		$(".create-session-app").removeClass("lui-disabled");
-		$(".close-session-app").addClass("lui-disabled");
-
-		if (sessionApp !== null) {
-
-			vizArray.forEach(viz => {
-				viz.close();
-			});
-			sessionApp.close().then(function () {
-				close.info("session app closed");
-			});
-		}
-
-	});
 	$(".close-session-app").addClass("lui-disabled");
 
 
@@ -238,6 +223,25 @@ require(["js/qlik"], function (qlik) {
 							} finally {
 								clearInterval(reload);
 							}
+						});
+
+						$(".close-session-app").click(function () {
+
+							$(".create-session-app").removeClass("lui-disabled");
+							$(".close-session-app").addClass("lui-disabled");
+							
+							$(".stop-reload").click();
+							
+							if (sessionApp !== null) {
+					
+								vizArray.forEach(viz => {
+									viz.close();
+								});
+								sessionApp.close().then(function () {
+									close.info("session app closed");
+								});
+							}
+					
 						});
 
 						$(".create-ODAG").click(function () {
